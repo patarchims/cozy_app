@@ -177,19 +177,52 @@ class _DetailPageState extends State<DetailPage> {
                                   margin: EdgeInsets.only(left: 24, right: 0),
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(16),
-                                    child: CachedNetworkImage(
-                                      imageUrl: e,
-                                      width: 110,
-                                      height: 80,
-                                      fit: BoxFit.cover,
-                                      placeholder: (context, url) => Center(
-                                          child: Container(
-                                              height: 30,
-                                              width: 30,
-                                              child:
-                                                  CircularProgressIndicator())),
-                                      errorWidget: (context, url, error) =>
-                                          Icon(Icons.error),
+                                    child: InkWell(
+                                      onTap: () {
+                                        showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return Container(
+                                                margin: EdgeInsets.symmetric(
+                                                    horizontal: defaultMargin,
+                                                    vertical:
+                                                        2 * defaultMargin),
+                                                padding: EdgeInsets.all(6),
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(25),
+                                                  child: CachedNetworkImage(
+                                                    imageUrl: e,
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width -
+                                                            2 * defaultMargin,
+                                                    height:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .height -
+                                                            4 * defaultMargin,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              );
+                                            });
+                                      },
+                                      child: CachedNetworkImage(
+                                        imageUrl: e,
+                                        width: 110,
+                                        height: 80,
+                                        fit: BoxFit.cover,
+                                        placeholder: (context, url) => Center(
+                                            child: Container(
+                                                height: 30,
+                                                width: 30,
+                                                child:
+                                                    CircularProgressIndicator())),
+                                        errorWidget: (context, url, error) =>
+                                            Icon(Icons.error),
+                                      ),
                                     ),
                                   ),
                                 );
